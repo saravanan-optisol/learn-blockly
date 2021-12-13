@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlocklyDrawerComponent initializes correctly when initial workspace is passed 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "minHeight": "400px",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  />
+  <xml
+    is="blockly"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`BlocklyDrawerComponent renders correctly when appearance is passed 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "minHeight": "400px",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  />
+  <xml
+    is="blockly"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <category
+      colour="blue"
+      is="blockly"
+      name="TestCategory"
+    >
+      <block
+        is="blockly"
+        type="TestName"
+      />
+    </category>
+  </xml>
+</div>
+`;
+
+exports[`BlocklyDrawerComponent renders correctly when no tools nor predefined categories are passed 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "minHeight": "400px",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  />
+  <xml
+    is="blockly"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`BlocklyDrawerComponent renders correctly when predefined categories are passed 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "minHeight": "400px",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  />
+  <xml
+    is="blockly"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <category
+      custom="PROCEDURE"
+      is="blockly"
+      name="Functions"
+    />
+  </xml>
+</div>
+`;
+
+exports[`BlocklyDrawerComponent renders correctly when tools are passed 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "minHeight": "400px",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  />
+  <xml
+    is="blockly"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <category
+      is="blockly"
+      name="TestCategory"
+    >
+      <block
+        is="blockly"
+        type="TestName"
+      />
+    </category>
+  </xml>
+</div>
+`;

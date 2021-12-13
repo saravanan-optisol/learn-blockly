@@ -1,0 +1,12 @@
+.block-text{
+  height: 2em;
+  width: 2em;
+  background-color: red;
+}
+
+.blocklyPath{
+  height: 2em;
+  width: 2em; 
+  background-color: blue;
+  cursor: pointer;
+}
