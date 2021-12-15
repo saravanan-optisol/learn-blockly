@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
 </head>
 <body>
-    <div id="blocklyDiv" style="height: 500px; width: 1200px;"></div>
+    <div id="blocklyDiv" style="height: 550px; width: 1200px;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 
@@ -36,11 +36,11 @@
       </block>
     </category>
     <category name='nested' colour='225'>
-      <category name='nest1' colour='100'>
         <block type='text'></block>
         <block type='text'></block>
         <block type='text'></block>
       </category>
+      <category name='nest1' colour='100'>
       <category name='nest2' colour='23'>
         <block type='text'></block>
         <block type='text'></block>
@@ -93,15 +93,45 @@
       <block type="string_length"></block>
       <label text="A label" web-class="myLabelStyle"></label>
     </category>
+    <category name='test' colour='122'>
+      <block type="ttest"></block>
+      <block type='math_change'></block>
+    </category>
   </xml>
 
   <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
-        { toolbox: document.getElementById('toolbox'),
+    //workspace injection
+    var demoWorkspace = Blockly.inject('blocklyDiv',{ 
+      toolbox: document.getElementById('toolbox'),
         // horizontalLayout: true,
-        // maxBlocks: 2 
-      });
+        // maxBlocks: 2 ,
+        grid:{
+          spacing: 20,
+          length: 3,
+          colour: '#ccc',
+          snap: true
+        },
+        move:{
+          scrollbars: {
+          horizontal: true,
+          vertical: true
+          },
+          drag: true,
+          wheel: false
+        },
+      zoom:{
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2,
+        pinch: true
+      },
+      trashcan: true
+  });
 
+//block definition
       Blockly.Blocks['string_length'] = {
         init: function() {
           this.appendValueInput('VALUE')
@@ -113,6 +143,8 @@
           this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
         }
       };
+
+      //generator function
       Blockly.JavaScript['text_length'] = function(block) {
         // String or array length.
         var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
@@ -125,7 +157,81 @@
         var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
             Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
         return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
-      }; 
+      };
+
+      Blockly.Blocks['ttest'] = {
+        init: function() {
+          this.appendValueInput('VALUE')
+              .setCheck('String')
+              .appendField('length of');
+          this.setOutput(true, 'Number');
+          this.setColour(160);
+          this.setTooltip('test the tool tip');
+          this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+        }
+      };
+      var mathChangeJson = {
+        "message0": "change %1 by %2",
+        "args0": [
+          {"type": "field_variable", "name": "VAR", "variable": "item", "variableTypes": [""]},
+          {"type": "input_value", "name": "DELTA", "check": "Number"}
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 230
+      };
+
+      Blockly.Blocks['math_change'] = {
+        init: function() {
+          this.jsonInit(mathChangeJson);
+          // Assign 'this' to a variable for use in the tooltip closure below.
+          var thisBlock = this;
+          this.setTooltip(function() {
+            return 'Add a number to variable "%1".'.replace('%1',
+                thisBlock.getFieldValue('VAR'));
+          });
+        }
+      };
+      //realtime generator
+      function myUpdateFunction(event) {
+        console.log('gen')
+        var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        // document.getElementById('textarea').value = code;
+      }
+      // demoWorkspace.addChangeListener(myUpdateFunction);
+
+      //event 
+      function onChange(event) {
+        if (event.type == Blockly.Events.BLOCK_CHANGE) {
+          console.log('change')
+          demoWorkspace.removeChangeListener(onChange);
+        }
+      }
+
+      function onCreate(event) {
+        if (event.type == Blockly.Events.BLOCK_CREATE) {
+          console.log('create')
+          // demoWorkspace.removeChangeListener(onCreate);
+        }
+      }
+
+      function onDelete(event) {
+        if (event.type == Blockly.Events.BLOCK_DELETE) {
+          console.log('delete')
+      }
+
+      function onClick(event) {
+        if (event.type == Blockly.Events.CLICK) {
+          console.log('click')
+          demoWorkspace.removeChangeListener(onClick);
+          demoWorkspace.removeChangeListener(onDelete);
+        }
+        }
+      }
+      demoWorkspace.addChangeListener(onChange);
+      demoWorkspace.addChangeListener(onCreate);
+      demoWorkspace.addChangeListener(onDelete);
+      demoWorkspace.addChangeListener(onClick);
   </script>
   
 </body>

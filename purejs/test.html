@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+</head>
+<body>
+    <div id="blocklyDiv" style="height: 550px; width: 1200px;"></div>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+        <category name='define_block'>
+            <block type='controls_if'></block>
+            <block type='connection'></block>
+            <block type='field'></block>
+            <block type='ochange'></block>
+            <block type='blcol'></block>
+          </category>
+    </xml>
+
+    <script>
+        //workspace injection
+        var demoWorkspace = Blockly.inject('blocklyDiv',{ 
+          toolbox: document.getElementById('toolbox')
+        });
+
+        Blockly.Msg.EVERYTHING_HUE = 42;
+
+        Blockly.Blocks['connection'] = {
+        init: function() {
+            //inputs
+            this.setInputsInline(true);
+            // this.setInputsInline(false);
+
+            //connections
+            //left output
+            // this.setOutput(true, null);
+
+            //top and bottom connections
+            /* 
+            this.setPreviousStatement(true, null);
+            this.setNextStatement(true, null); */
+            
+            //top connection
+            // this.setPreviousStatement(true, null);
+
+            //bottom connection
+            // this.setNextStatement(true, null);  
+            //colour
+          this.setColour(16);
+          this.setTooltip('test the connections');
+          this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+        }
+      };
+
+      Blockly.Blocks['field'] = {
+        init: function() {
+           
+            //value input
+            /* this.appendValueInput("NAME")
+                .setCheck(null);
+ */
+            //statement input   
+            /* this.appendStatementInput("NAME")
+                .setCheck(null); */
+                
+            //dummy input
+            // this.appendDummyInput()
+
+            //dummy input with field
+            this.appendDummyInput()
+                .setAlign(Blockly.ALIGN_RIGHT);
+
+            //append field
+            this.appendStatementInput("NAME")
+                .setCheck(null)
+                .appendField(new Blockly.FieldCheckbox("TRUE"), "dfe");
+          this.setColour(16);
+          this.setTooltip('test the field');
+          this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+        }
+      };
+
+      Blockly.Blocks['ochange'] = {
+            init: function() {
+                // Example validation upon block change:
+               /*  this.setOnChange(function(changeEvent) {
+                if (this.getInput('NUM').connection.targetBlock()) {
+                    this.setWarningText(null);
+                } else {
+                    this.setWarningText('Must have an input block.');
+                } 
+                console.log('ochandlkfji')
+                }); */
+            }
+    }
+
+    Blockly.Blocks['blcol'] = {
+        init: function() {
+            this.appendStatementInput("NAME")
+                .setCheck(null)
+                .appendField(new Blockly.FieldCheckbox("TRUE"), "dfe");
+            this.setColour(16);
+            this.setTooltip('test the field');
+            this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+        }
+    }
+
+    
+
+    block.setColour('%{BKY_EVERYTHING_HUE}');
+
+      Blockly.JavaScript['connection'] = function(block) {
+        // String or array length.
+        var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
+            Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+        return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
+      };  
+    </script>
+</body>
+</html>
