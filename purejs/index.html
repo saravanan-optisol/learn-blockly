@@ -92,9 +92,9 @@
     <category name='label' colour='12'>
       <block type="string_length"></block>
       <label text="A label" web-class="myLabelStyle"></label>
+      <block type="ttest"></block>
     </category>
     <category name='test' colour='122'>
-      <block type="ttest"></block>
       <block type='math_change'></block>
     </category>
   </xml>
@@ -168,6 +168,20 @@
           this.setColour(160);
           this.setTooltip('test the tool tip');
           this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+        }
+      };
+
+      Blockly.Blocks['validator_example'] = {
+        init: function() {
+          // Remove all 'a' characters from the text input's value.
+          var validator = function(newValue) {
+            return newValue.replace(/\a/g, '');
+          };
+
+          var field = new Blockly.FieldTextInput('default');
+          field.setValidator(validator);
+
+          this.appendDummyInput().appendField(field);
         }
       };
       var mathChangeJson = {

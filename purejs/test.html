@@ -17,6 +17,19 @@
             <block type='field'></block>
             <block type='ochange'></block>
             <block type='blcol'></block>
+            <block type='validator_example'></block>
+            <block type='example_angle'></block>
+            <block type='example_checkbox'></block>
+            <block type='example_colour'></block>
+            <block type='example_date'></block>
+            <block type='example_dropdown'></block>
+            <block type='example_image'></block>
+            <block type='example_label'></block>
+            <block type='example_number'></block>
+            <block type='example_serializable_label'></block>
+            <block type='example_textinput'></block>
+            <block type='example_variable_typed'></block>
+            <block type='example_variable_untyped'></block>
           </category>
     </xml>
 
@@ -97,6 +110,145 @@
             }
     }
 
+    Blockly.Blocks['validator_example'] = {
+        init: function() {
+            // Remove all 'a' characters from the text input's value.
+            /* var validator = function(newValue) {
+            return newValue.replace(/\a/g, '');
+            }; */
+
+            // Any value containing a 'b' character is invalid.  Other values are valid.
+            var validator = function(newValue) {
+            if (newValue.indexOf('b') != -1) {
+                return null;
+            }
+            return newValue;
+            };
+
+            var field = new Blockly.FieldTextInput('default');
+            field.setValidator(validator);
+
+            this.appendDummyInput().appendField(field);
+        }
+        };
+
+        Blockly.Blocks['example_angle'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('angle:')
+                    .appendField(new Blockly.FieldAngle(90), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_checkbox'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('checkbox:')
+                    .appendField(new Blockly.FieldCheckbox(true), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_colour'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('colour:')
+                    .appendField(new Blockly.FieldColour('#ff4040',
+                        {
+                            "colourOptions":
+                            ['#ff4040', '#ff8080', '#ffc0c0',
+                            '#4040ff', '#8080ff', '#c0c0ff'],
+                            "colourTitles":
+                            ['dark pink', 'pink', 'light pink',
+                            'dark blue', 'blue', 'light blue'],
+                            "columns": 3
+                        }), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_date'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('date:')
+                    .appendField(new Blockly.FieldDate('2020-02-20'), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_dropdown'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('drop down:')
+                    .appendField(new Blockly.FieldDropdown([
+                        ['first item', 'ITEM1'],
+                        ['second item', 'ITEM2']
+                    ]), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_image'] = {
+            init: function() {
+                this.appendDummyInput()
+                .appendField("image:")
+                .appendField(new Blockly.FieldImage(
+                    "https://www.gstatic.com/codesite/ph/images/star_on.gif",
+                    15,
+                    15,
+                    "*"));
+        }
+        };
+
+        Blockly.Blocks['example_label'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField(new Blockly.FieldLabel('a label'));
+                this.appendDummyInput()
+                    .appendField('and another label');
+            }
+            };
+
+        Blockly.Blocks['example_serializable_label'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField(new Blockly.FieldLabelSerializable("a serializable label"), "FIELDNAME");
+            }
+            };
+
+        Blockly.Blocks['example_number'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField("number:")
+                    .appendField(new Blockly.FieldNumber(100, 0, 100, 10), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_textinput'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("text input:")
+                .appendField(new Blockly.FieldTextInput('default text'),
+                    'FIELDNAME');
+        }
+        };
+
+        Blockly.Blocks['example_variable_untyped'] = {
+            init: function() {
+                this.appendDummyInput()
+                    .appendField('variable:')
+                    .appendField(new Blockly.FieldVariable('x'), 'FIELDNAME');
+            }
+            };
+
+        Blockly.Blocks['example_variable_typed'] = {
+            init: function() {
+                this.appendDummyInput()
+                .appendField('variable:')
+                .appendField(new Blockly.FieldVariable(
+                    'X',
+                    null,
+                    ['Number', 'String'],
+                    'Number'
+                ), 'FIELDNAME');
+            }
+            };
     Blockly.Blocks['blcol'] = {
         init: function() {
             this.appendStatementInput("NAME")
